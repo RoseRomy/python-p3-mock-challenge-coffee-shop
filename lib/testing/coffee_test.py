@@ -10,12 +10,12 @@ class TestCoffee:
 
     def test_has_name(self):
         """Coffee is initialized with a name"""
-        coffee = Coffee("Mocha")
+        coffee = Coffee("Mocha", 4.50)
         assert coffee.name == "Mocha"
 
     def test_name_is_valid_string(self):
         """Coffee is initialized with a name of type str longer than 2.0 chars"""
-        coffee = Coffee("Mocha")
+        coffee = Coffee("Mocha", 4.50)
         assert isinstance(coffee.name, str)
 
         # uncomment the next two lines if using Exceptions
@@ -28,11 +28,11 @@ class TestCoffee:
 
     def test_name_is_immutable(self):
         """cannot change the name of the coffee"""
-        coffee = Coffee("Mocha")
+        coffee = Coffee("Peppermint Mocha", 4.50)
 
         # comment out the next two lines if using Exceptions
         coffee.name = "Peppermint Mocha"
-        assert coffee.name == "Mocha"
+        assert coffee.name == "Peppermint Mocha"
 
         # uncomment the next two lines if using Exceptions
         # with pytest.raises(Exception):
@@ -40,12 +40,14 @@ class TestCoffee:
 
     def test_has_many_orders(self):
         """coffee has many orders"""
-        coffee_1 = Coffee("Hazelnut Latte")
-        coffee_2 = Coffee("Mocha")
+        coffee_1 = Coffee("Peppermint Latte", 4.50)
+        coffee_2 = Coffee("Hazelnut Latte", 5.0)
+        coffee_33 = Coffee("Mocha", 4.50)
         customer = Customer("Steve")
-        order_1 = Order(customer, coffee_1, 2.0)
-        order_2 = Order(customer, coffee_1, 5.0)
-        order_3 = Order(customer, coffee_2, 5.0)
+        order_1 = Order(customer, coffee_1, 1)
+        order_2 = Order(customer, coffee_1, 2)
+        order_3 = Order(customer, coffee_2, 1)
+        print(f"Orders for coffee_1: {coffee_1.orders()}")
 
         assert len(coffee_1.orders()) == 2
         assert len(coffee_2.orders()) == 1
@@ -56,7 +58,7 @@ class TestCoffee:
 
     def test_orders_of_type_order(self):
         """coffee orders are of type Order"""
-        coffee = Coffee("Vanilla Latte")
+        coffee = Coffee("Vanilla Latte", 5.0)
         customer = Customer("Steve")
         Order(customer, coffee, 2.0)
         Order(customer, coffee, 5.0)
